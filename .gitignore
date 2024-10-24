@@ -1,0 +1,40 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Environment variables
+.env
+
+# TypeScript compiled files
+dist/
+build/
+
+# Docker
+docker-compose.override.yml
+
+# MacOS system files
+.DS_Store
+
+# VSCode files
+.vscode/
+
+# Test coverage reports
+coverage/
+*.lcov
+
+# Debugging cache files
+.cache/
+
+# Redis Dump
+dump.rdb
