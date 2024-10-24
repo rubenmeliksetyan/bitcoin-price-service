@@ -38,3 +38,5 @@ coverage/
 
 # Redis Dump
 dump.rdb
+
+.idea
