@@ -20,11 +20,7 @@ export class CacheService implements ICacheService {
     }
 
     async set(key: string, value: string, expireInSeconds?: number): Promise<void> {
-        if (expireInSeconds) {
-            await this.client.set(key, value, { EX: expireInSeconds });
-        } else {
-            await this.client.set(key, value);
-        }
+        expireInSeconds ? await this.client.set(key, value, { EX: expireInSeconds }) : await this.client.set(key, value);
     }
 
     async get(key: string): Promise<string | null> {

@@ -18,7 +18,6 @@ export const getPriceHandler = async (req: Request, res: Response) => {
     }
 };
 
-// Function to initialize cache connection
 export const initializeCache = async () => {
     await cacheService.connect();
 };
