@@ -1,5 +1,5 @@
 import axios from 'axios';
-import BinanceService from "../src/services/binanceService";
+import BinanceService from "../services/binanceService";
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;

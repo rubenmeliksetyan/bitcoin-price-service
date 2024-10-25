@@ -8,7 +8,11 @@ const config: Config = {
     transform: {
         '^.+\\.ts?$': 'ts-jest',
     },
-    testMatch: ['**/tests/**/*.tests.ts'],
+    rootDir: '../',
+    testMatch: [
+        '**/tests/**/*.[tj]s?(x)',
+        '**/?(*.)+(spec|test).[tj]s?(x)'
+    ],
     clearMocks: true,
 };
 

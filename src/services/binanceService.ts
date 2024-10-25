@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class BinanceService {
+export default class BinanceService {
     private readonly apiUrl: string;
     private readonly commission: number;
 
@@ -62,5 +62,3 @@ class BinanceService {
         return price * (1 + this.commission);
     }
 }
-
-export default BinanceService;

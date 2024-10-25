@@ -1,29 +1,37 @@
 import { createClient } from 'redis';
-import { ICacheService } from './cacheInterface';
 
-export class CacheService implements ICacheService {
+export default class RedisService {
     private client;
+    private isConnected: boolean = false;
 
-    constructor(private url: string) {
-        this.client = createClient({ url: this.url });
+    constructor(redisUrl: string) {
+        this.client = createClient({ url: redisUrl });
+        this.client.on('error', (err) => console.error('Redis Client Error', err));
     }
 
-    async connect(): Promise<void> {
-        this.client.on('error', (err) => console.error('Cache Service Error', err));
-        await this.client.connect();
-        console.log('Connected to Cache Service (Redis)');
+    public async connect() {
+        if (!this.isConnected) {
+            await this.client.connect();
+            this.isConnected = true;
+        }
     }
 
-    async disconnect(): Promise<void> {
-        await this.client.disconnect();
-        console.log('Disconnected from Cache Service (Redis)');
-    }
-
-    async set(key: string, value: string, expireInSeconds?: number): Promise<void> {
+    public async set(key: string, value: string, expireInSeconds?: number) {
+        if (!this.isConnected) {
+            await this.connect();
+        }
         expireInSeconds ? await this.client.set(key, value, { EX: expireInSeconds }) : await this.client.set(key, value);
     }
 
-    async get(key: string): Promise<string | null> {
+    public async get(key: string): Promise<string | null> {
+        if (!this.isConnected) {
+            await this.connect();
+        }
         return await this.client.get(key);
+    }
+
+    public async disconnect() {
+        await this.client.disconnect();
+        this.isConnected = false;
     }
 }
